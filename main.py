@@ -192,23 +192,7 @@ def load_weights():
     cnn_loaded = os.path.isfile(m1_path)
     fc6_loaded = os.path.isfile(m2_path)
     c3d_loaded = os.path.isfile(c3d_path)
-    if cnn_loaded and fc6_loaded and c3d_loaded:
-        return
-
-    s3 = boto3.client(
-            's3',
-            aws_access_key_id = st.secrets["access_id"],
-            aws_secret_access_key = st.secrets["access_key"]
-            )
-    if not cnn_loaded:
-        s3.download_file(BUCKET_NAME, BUCKET_WEIGHT_CNN, m1_path)
-    if not fc6_loaded:
-        s3.download_file(BUCKET_NAME, BUCKET_WEIGHT_FC6, m2_path)
-    if not c3d_loaded:
-        urllib.request.urlretrieve(
-            "http://imagelab.ing.unimore.it/files/c3d_pytorch/c3d.pickle",
-            c3d_path
-            )
+    return cnn_loaded and fc6_loaded and c3d_loaded
 
     # urllib.request.urlretrieve(
     #         "https://aqa-diving.s3.us-west-2.amazonaws.com/{}".format(BUCKET_WEIGHT_CNN), m1_path)
