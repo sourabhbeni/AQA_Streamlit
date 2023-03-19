@@ -16,7 +16,6 @@ from models.C3D_altered import C3D_altered
 from models.my_fc6 import my_fc6
 from models.score_regressor import score_regressor
 from models.C3D_model import C3D
-import streamlit_analytics
 from opts import *
 import numpy as np
 import streamlit as st
@@ -46,7 +45,6 @@ transform = transforms.Compose([transforms.ToTensor(),
 
 def center_crop(img, dim):
     """Returns center cropped image
-
     Args:Image Scaling
     img: image to be center cropped
     dim: dimensions (width, height) to be cropped from center
@@ -304,7 +302,6 @@ def make_prediction(video_file):
 if __name__ == '__main__':
     with st.spinner('Loading to welcome you...'):
         load_weights()
-    with streamlit_analytics.track(unsafe_password=st.secrets["analytics"]):
         st.title("AI Olympics Judge")
         st.subheader("Upload Olympics diving video and check its AI predicted score")
         footer()
@@ -353,6 +350,3 @@ if __name__ == '__main__':
                     print(f"Predicted score after multiplication: {val}")
                     res_img.empty()
                     res_msg.success("Predicted score: {}".format(val))
-
-
-
